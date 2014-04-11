@@ -1,0 +1,35 @@
+<utf-8_data>
+<kkbox_package>
+	<kkbox_ver>04000016</kkbox_ver>
+
+	<playlist>
+		<playlist_id>1</playlist_id>
+		<playlist_name>Test</playlist_name>
+		<playlist_descr></playlist_descr>
+		<playlist_data>
+			<song_data>
+				<song_pathname>24855760</song_pathname>
+			</song_data>
+		</playlist_data>
+	</playlist>
+
+	<playlist>
+		<playlist_id>1</playlist_id>
+		<playlist_name>Test 2</playlist_name>
+		<playlist_descr></playlist_descr>
+		<playlist_data>
+			<song_data>
+				<song_pathname>24855727</song_pathname>
+			</song_data>
+		</playlist_data>
+	</playlist>
+
+	<package>
+		<ver>1.0</ver>
+		<descr>包裝說明</descr>
+		<packdate>201404111408</packdate>
+		<playlistcnt>2</playlistcnt>
+		<songcnt>2</songcnt>
+	</package>
+</kkbox_package>
+</utf-8_data>
