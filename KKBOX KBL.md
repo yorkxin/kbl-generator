@@ -32,6 +32,8 @@ KKBOX Playlist (KBL) Generator
 
 https://docs.google.com/spreadsheets/d/1h_x3L9_LTKC2GCYo_nkjZvLlzpsWwMSzKjZqzCRsHWs/edit?usp=sharing
 
+以目前 KKBOX 的功能，應該是要自己手動加入歌單，因為「共享歌單」不能編輯，若編輯則需要重新發佈，會成為新的歌單。
+
 ---
 
 以上僅實驗 KKBOX for Mac 。
