@@ -1,0 +1,27 @@
+<utf-8_data>
+<kkbox_package>
+	<kkbox_ver>04000016</kkbox_ver>
+ 
+	<playlist>
+		<playlist_id>1</playlist_id>
+		<playlist_name>Playlist</playlist_name>
+		<playlist_descr></playlist_descr>
+		<playlist_data>
+		<% @ids.each do |id| %>
+			<song_data>
+				<song_pathname><%= id %></song_pathname>
+			</song_data>
+		<% end %>
+		</playlist_data>
+	</playlist>
+ 
+	<package>
+		<ver>1.0</ver>
+		<descr>包裝說明</descr>
+		<packdate><%= @now.strftime("%Y%m%d%H%M%S") %></packdate>
+		<playlistcnt>1</playlistcnt>
+		<songcnt><%= @ids.size %></songcnt>
+	</package>
+</kkbox_package>
+</utf-8_data>
+
