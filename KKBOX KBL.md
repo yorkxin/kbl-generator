@@ -33,7 +33,7 @@ genkbl.rb 。用法是丟進 STDIN 它會吐 KBL source 到 STDOUT，需使用 u
 1. 把所有 id 放在 `ids.txt`
 2. 執行：
 
-  cat ids.txt | ruby genkbl.rb > playlist.kbl
+      cat ids.txt | ruby genkbl.rb > playlist.kbl
 
 3. 打開 `playlist.kbl`
 
