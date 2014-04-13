@@ -12,6 +12,8 @@ KKBOX Playlist (KBL) Generator
 
 因此，希望有一個方法，只要找出 KKBOX 內的音樂列表，就可以製作出 KBL 檔。
 
+**Disclaimer:** 本人任職於 KKBOX ，但工作內容與 KKBOX 服務本身無關，是以使用者的角度來製作本工具。請不要當做 KKBOX 對此工具有任何背書。使用本工具製作出來的 KBL 檔可能會對你的 KKBOX 曲庫有負面影響。
+
 ## 關於檔案格式
 
 看起來是 XML 但實際上不是，因為第一行沒有宣告 header 。
