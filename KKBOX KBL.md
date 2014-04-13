@@ -31,7 +31,7 @@ KKBOX Playlist (KBL) Generator
 * × song_pathname
 * × song_pathname + song_artist_id
 * △ song_pathname + song_artist_id + song_album_id
-* △ song_pathname + song_artist_id + song_album_id
+* △ song_pathname + song_album_id
 
 △ = 匯入是空白，但播放之後就可以查到曲目資訊。可以用，但不完美。
 
