@@ -26,6 +26,18 @@ KKBOX Playlist (KBL) Generator
 
 另外 KBL 檔歌單可以多載歌單，意思是說一個檔案裡存在多份歌單，匯入的時候，會一起匯入。但重要的是在 `<package>/<playlistcnt>` 裡面指定有幾份歌單，不指定的話，不管有多少 `<playlist>` 都不會匯入成功。
 
+## 產生器
+
+genkbl.rb 。用法是丟進 STDIN 它會吐 KBL source 到 STDOUT，需使用 unix pipe 來方便作業。
+
+1. 把所有 id 放在 `ids.txt`
+2. 執行：
+
+  cat ids.txt | ruby genkbl.rb > playlist.kbl
+
+3. 打開 `playlist.kbl`
+
+
 ## 作業方式
 
 待議。至於歌單在此：
