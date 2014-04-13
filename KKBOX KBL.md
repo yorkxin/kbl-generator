@@ -24,16 +24,34 @@ KKBOX Playlist (KBL) Generator
 
 意思是說，要用程式製作一份歌單，最少需要哪些資訊。
 
+根據 KKBOX 匯出的 kbl 檔可知有以下這些 meta info:
+
+| field | 用途 | 資料型態 |
+|-------|-----|---------|
+| song_name | 曲名 | String |
+| song_artist | Artist 名 | String |
+| song_album | 專輯名 | String |
+| song_genre | Genre ID | Integer |
+| song_preference | 是否加☆ | Boolean (0 or 1) |
+| song_playcnt | 播放次數 | Integer |
+| song_pathname | 曲目編號 | Integer |
+| song_type | （不明） | Integer |
+| song_lyricsexist | 是否有歌詞 | Boolean (0 or 1) |
+| song_artist_id | Artist 編號 | Integer |
+| song_album_id | 專輯編號 | Integer |
+| song_song_idx | 曲目在專輯裡的排序 | Integer |
+
 原本認為，只需要 `<song_pathanme>` 就行了，但實際使用的結果發現，如果不填寫其他資料，會導致匯入資料庫的時候沒有任何資訊，結果就是出現空白曲目。如果該曲目在使用者的 KKBOX 完全沒有播過，就會發生這樣的情況。如果是曾經播過的就不會，所謂的曾經播過，包括：播過了之後把它從個人曲庫和播放記錄裡面移除，它會 cache 住，直到重新打開 KKBOX 程式。所以實際上很實驗出「確定有效的組合」。
 
 試過的組合：
 
-* × song_pathname
-* × song_pathname + song_artist_id
-* △ song_pathname + song_artist_id + song_album_id
-* △ song_pathname + song_album_id
+* ✕ `song_pathname`
+* ✕ `song_pathname` + `song_artist_id`
+* △ `song_pathname` + `song_artist_id` + `song_album_id`
+* △ `song_pathname` + `song_album_id`
 
-△ = 匯入是空白，但播放之後就可以查到曲目資訊。可以用，但不完美。
+× = 匯入是空白，也無法播放。
+△ = 匯入是空白，但按兩下可以播放，播放後就會查到曲目資訊。可以用，但不完美。
 
 另外 KBL 檔歌單可以多載歌單，意思是說一個檔案裡存在多份歌單，匯入的時候，會一起匯入。但重要的是在 `<package>/<playlistcnt>` 裡面指定有幾份歌單，不指定的話，不管有多少 `<playlist>` 都不會匯入成功。
 
