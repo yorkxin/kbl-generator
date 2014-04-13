@@ -43,6 +43,15 @@ KKBOX Playlist (KBL) Generator
 
 原本認為，只需要 `<song_pathanme>` 就行了，但實際使用的結果發現，如果不填寫其他資料，會導致匯入資料庫的時候沒有任何資訊，結果就是出現空白曲目。如果該曲目在使用者的 KKBOX 完全沒有播過，就會發生這樣的情況。如果是曾經播過的就不會，所謂的曾經播過，包括：播過了之後把它從個人曲庫和播放記錄裡面移除，它會 cache 住，直到重新打開 KKBOX 程式。所以實際上很實驗出「確定有效的組合」。
 
+以下這些可能必須存在才能成功匯入：
+
+| field | 用途 | 取得方式 |
+|-------|-----|---------|
+| song_pathname | 曲目編號 | 網頁版播放按鈕的 `kkbox://play_song_XXXXXXXX` |
+| song_artist_id | Artist 編號 | ？ |
+| song_album_id | 專輯編號 | 網頁版全部播放按鈕的 `kkbox://playlist_??_XXXXXXXX`  |
+| song_song_idx | 曲目在專輯裡的排序 | ？ |
+
 試過的組合：
 
 * ✕ `song_pathname`
