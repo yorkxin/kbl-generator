@@ -2,10 +2,21 @@
 #
 # ## Usage:
 #
-# 1. prepare `ids.txt` and put all the ids in that file.
+# 1. Prepare `input.tsv` which contains lines in this format:
+#   
+#      Artist Name  Title   Album ID    Song ID
+#
+#    each column is separated by a single tab character (\t).
+#
+#    Example:
+#
+#      angela\tKINGS\t465209\tZERO\t1962331\t20706554
+#      angela\t境界線Set me free\t465209\tZERO\t1962331\t20706569
+#      angela\tいつかのゼロから\t465209\tZERO\t1962331\t20706581
+#
 # 2. run:
 #
-#      cat ids.txt | ruby genkbl.rb > playlist.kbl
+#      ruby genkbl.rb < input.tsv > playlist.kbl
 #
 # 3. Open playlist.kbl
 #
@@ -33,7 +44,7 @@
 #
 require 'erb'
 
-class KKBOXEntry < Struct.new(:album_id, :song_id)
+class KKBOXEntry < Struct.new(:artist, :title, :album_name, :album_id, :song_id)
 end
 
 class Renderer
@@ -53,8 +64,7 @@ input = STDIN.readlines
 input.each(&:chomp!).delete("")
 
 kkbox_entries = input.map {|line|
-  album_id, song_id = line.split("\t")
-  KKBOXEntry.new(album_id, song_id)
+  KKBOXEntry.new(*line.split("\t"))
 }
 
 renderer = Renderer.new(kkbox_entries, Time.now)

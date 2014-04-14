@@ -9,9 +9,9 @@
 		<playlist_data>
 		<% @entries.each do |entry| %>
 			<song_data>
-				<song_name></song_name>
-				<song_artist></song_artist>
-				<song_album></song_album>
+				<song_name><%= entry.title %></song_name>
+				<song_artist><%= entry.artist %></song_artist>
+				<song_album><%= entry.album_name %></song_album>
 				<song_genre></song_genre>
 				<song_preference></song_preference>
 				<song_playcnt></song_playcnt>
