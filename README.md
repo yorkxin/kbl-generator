@@ -1,8 +1,10 @@
-KKBOX Playlist (KBL) Generator
+# KKBOX Playlist (KBL) Generator
+
+實驗從 KKBOX 曲目 ID 做出 KKBOX 歌單檔（KBL）的專案。
 
 ## 緣起
 
-* 有人說想要聽 ACG 的音樂
+* <del>有人說</del>我想要聽 ACG 的音樂
 * 明明 KKBOX 裡面有很多卻不知道哪裡有完整列表
 * 而 KKBOX 現階段的共享歌單功能並不利於「常常會更改的歌單」
   * 共享出去的歌單無法修改
