@@ -7,9 +7,20 @@
 		<playlist_name>Playlist</playlist_name>
 		<playlist_descr></playlist_descr>
 		<playlist_data>
-		<% @ids.each do |id| %>
+		<% @entries.each do |entry| %>
 			<song_data>
-				<song_pathname><%= id %></song_pathname>
+				<song_name></song_name>
+				<song_artist></song_artist>
+				<song_album></song_album>
+				<song_genre></song_genre>
+				<song_preference></song_preference>
+				<song_playcnt></song_playcnt>
+				<song_pathname><%= entry.song_id %></song_pathname>
+				<song_type></song_type>
+				<song_lyricsexist></song_lyricsexist>
+				<song_artist_id></song_artist_id>
+				<song_album_id><%= entry.album_id %></song_album_id>
+				<song_song_idx></song_song_idx>
 			</song_data>
 		<% end %>
 		</playlist_data>
@@ -20,7 +31,7 @@
 		<descr>包裝說明</descr>
 		<packdate><%= @now.strftime("%Y%m%d%H%M%S") %></packdate>
 		<playlistcnt>1</playlistcnt>
-		<songcnt><%= @ids.size %></songcnt>
+		<songcnt><%= @entries.size %></songcnt>
 	</package>
 </kkbox_package>
 </utf-8_data>

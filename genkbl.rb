@@ -33,9 +33,12 @@
 #
 require 'erb'
 
+class KKBOXEntry < Struct.new(:album_id, :song_id)
+end
+
 class Renderer
-  def initialize(ids, now)
-    @ids = ids
+  def initialize(entries, now)
+    @entries = entries
     @now = now
 
     @erb = ERB.new(File.read("kbl_template.erb"))
@@ -46,9 +49,14 @@ class Renderer
   end
 end
 
-kkbox_ids = STDIN.readlines
-kkbox_ids.each(&:chomp!).delete("")
+input = STDIN.readlines
+input.each(&:chomp!).delete("")
 
-renderer = Renderer.new(kkbox_ids, Time.now)
+kkbox_entries = input.map {|line|
+  album_id, song_id = line.split("\t")
+  KKBOXEntry.new(album_id, song_id)
+}
+
+renderer = Renderer.new(kkbox_entries, Time.now)
 
 puts renderer.render
