@@ -1,4 +1,4 @@
-ACG_TSV = "https://docs.google.com/spreadsheets/d/1h_x3L9_LTKC2GCYo_nkjZvLlzpsWwMSzKjZqzCRsHWs/export?format=tsv&id=1h_x3L9_LTKC2GCYo_nkjZvLlzpsWwMSzKjZqzCRsHWs&gid=445984614"
+URL_ACG = "https://docs.google.com/spreadsheets/d/1h_x3L9_LTKC2GCYo_nkjZvLlzpsWwMSzKjZqzCRsHWs/export?format=tsv&id=1h_x3L9_LTKC2GCYo_nkjZvLlzpsWwMSzKjZqzCRsHWs&gid=445984614"
 
 TARGETS = ACG.kbl
 TSV_FILES = ACG.tsv
@@ -10,9 +10,9 @@ clean:
 
 download: $(TSV_FILES)
 
-ACG.kbl: ACG.tsv
-	ruby genkbl.rb < ACG.tsv > ACG.kbl
+%.kbl: %.tsv
+	ruby genkbl.rb < $*.tsv > $*.kbl
 
-ACG.tsv:
-	curl -o ACG.tsv $(ACG_TSV)
+%.tsv:
+	curl -o $@ $(URL_$*)
 
