@@ -18,7 +18,7 @@ KKBOX Playlist (KBL) Generator
 
 本程式僅實驗 KKBOX for Mac 。
 
-到 Downloads 裡面下載 ACG.kbl ，按兩下滑鼠左鍵打開。
+按兩下滑鼠左鍵來打開 ACG.kbl。
 
 * 一般用戶：尚有 bug ，不建議使用。
 * Hacker：請看下面的「產生器」一節。
