@@ -3,10 +3,13 @@ URL_ACG = "https://docs.google.com/spreadsheets/d/1h_x3L9_LTKC2GCYo_nkjZvLlzpsWw
 TARGETS = ACG.kbl
 TSV_FILES = ACG.tsv
 
-all:	$(TARGETS)
+SCRIPTS_SRC = $(wildcard *.applescript)
+SCRIPTS_BIN = $(SCRIPTS_SRC:.applescript=.scpt)
+
+all:	$(TARGETS) $(SCRIPTS_BIN)
 
 clean:
-	rm $(TARGETS) $(TSV_FILES)
+	rm $(TARGETS) $(TSV_FILES) $(SCRIPTS_BIN)
 
 download: $(TSV_FILES)
 
@@ -16,3 +19,5 @@ download: $(TSV_FILES)
 %.tsv:
 	curl -o $@ $(URL_$*)
 
+%.scpt: %.applescript
+	osacompile -o $@ $<
