@@ -30,7 +30,7 @@ tell application "System Events"
 			
 			tell value of first text field to playlist_name
 			
-			# click button "Export"
+			click button "Export"
 		end tell
 	end tell
 end tell
