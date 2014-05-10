@@ -3,7 +3,7 @@
 # ## Usage:
 #
 # 1. Prepare `input.tsv` which contains lines in this format:
-#   
+#
 #      Artist Name  Title   Album ID    Song ID
 #
 #    each column is separated by a single tab character (\t).
@@ -23,31 +23,32 @@
 # ## License
 # Licensed under the MIT License. See `LICENSE` file.
 #
-require 'erb'
+require 'kbl'
 
 class KKBOXEntry < Struct.new(:artist, :title, :album_name, :album_id, :song_id)
-end
-
-class Renderer
-  def initialize(entries, now)
-    @entries = entries
-    @now = now
-
-    @erb = ERB.new(File.read("kbl_template.erb"))
-  end
-
-  def render
-    @erb.result(binding)
-  end
 end
 
 input = STDIN.readlines
 input.each(&:chomp!).delete("")
 
-kkbox_entries = input.map {|line|
-  KKBOXEntry.new(*line.split("\t"))
-}
+kbl = KBL::Package.new do |package|
+  package.add_playlist do |playlist|
+    # TODO: use command line args
+    playlist.name = "Playlist 1"
+    playlist.description = "A Sample Playlist"
 
-renderer = Renderer.new(kkbox_entries, Time.now)
+    input.map do |line|
+      playlist.add_song do |song|
+        entry = KKBOXEntry.new(*line.split("\t"))
 
-puts renderer.render
+        song.name     = entry.title
+        song.pathname = entry.song_id
+        song.artist   = entry.artist
+        song.album    = entry.album_name
+        song.album_id = entry.album_id
+      end
+    end
+  end
+end
+
+puts kbl.to_kbl
