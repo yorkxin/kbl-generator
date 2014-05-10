@@ -29,11 +29,12 @@ kbl = KBL::Package.new do |package|
     playlist.description = "A Sample Playlist"
 
     playlist.add_song do |song|
-      song.name     = ""
-      song.pathname = entry.song_id
-      song.artist   = entry.artist
-      song.album    = entry.album_name
-      song.album_id = entry.album_id
+      song.name      = "君の知らない物語"
+      song.pathname  = "3665602"
+      song.artist    = "Supercell"
+      song.artist_id = "197227"
+      song.album     = "Today Is A Beautiful Day"
+      song.album_id  = "314546"
     end
   end
 end
@@ -79,7 +80,7 @@ Can exist multiple times across multiple playlists.
 
 ## Contributing
 
-1. Fork it ( http://github.com/<my-github-username>/kbl/fork )
+1. Fork it ( http://github.com/chitsaou/kbl-generator/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
