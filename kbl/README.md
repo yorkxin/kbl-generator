@@ -160,9 +160,8 @@ Can exist multiple times across multiple playlists.
 
 ## TODO
 
-* Make a CLI tool for generating KBL files.
-* Scraping meta data from KKBOX client database from given Song IDs.
 * A workflow for how to build a KBL file from Song IDs.
+* More output formats for `kbl dump` command, e.g. CSV, JSON
 
 ## License
 
