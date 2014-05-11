@@ -22,7 +22,7 @@ module KBL
       end
     end
 
-    desc "import [FILENAME]", "Import KKBOX Songs from a list of IDs through [FILENAME] or STDIN."
+    desc "import [INPUT_FILE or STDIN]", "Import KKBOX Songs from a list of IDs through [FILENAME] or STDIN."
     long_desc <<-EOS
       Given a list of KKBOX Song IDs (pathname), import them to your KKBOX client's
       Temporary Playlist, by brute-forcely `open`ing a bunch of
@@ -67,7 +67,7 @@ module KBL
       system "open #{ids.map { |id| "kkbox://play_song_#{id}" }.join(' ')}"
     end
 
-    desc "dump [INPUT_FILENAME or STDIN] [-o=OUTPUT] [-f=FORMAT]",
+    desc "dump [INPUT_FILE or STDIN] [-o=OUTPUT_FILE or STDOUT] [-f=tsv]",
          "Dump meta data of KKBOX songs from your local KKBOX client database."
     long_desc <<-EOS
       Given a list of KKBOX Song IDs (pathname), find their meta data from your
