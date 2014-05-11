@@ -42,6 +42,20 @@ end
 puts kbl.to_kbl #=> the KBL source code (in XML)
 ```
 
+### CLI Tool
+
+This gem provides a CLI tool `kbl` that simplifies playlist importing / dumping via Song IDs (pathname).
+
+Usage:
+
+```txt
+# Import KKBOX Songs from a list of IDs through [FILENAME] or STDIN.
+kbl import [INPUT_FILE or STDIN]
+
+# Dump meta data of KKBOX songs from your local KKBOX client database.
+kbl dump [INPUT_FILE or STDIN] [-o=OUTPUT_FILE or STDOUT] [-f=tsv]
+```
+
 ## Required Song Meta Data
 
 To generate a working KBL file, the following data for every song must be provided.
