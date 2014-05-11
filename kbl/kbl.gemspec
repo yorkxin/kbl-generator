@@ -5,7 +5,7 @@ require 'kbl/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "kbl"
-  spec.version       = Kbl::VERSION
+  spec.version       = KBL::VERSION
   spec.authors       = ["Yu-Cheng Chuang"]
   spec.email         = ["ducksteven@gmail.com"]
   spec.summary       = %q{KKBOX Playlist Builder}
@@ -14,7 +14,7 @@ Gem::Specification.new do |spec|
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
-  spec.executables   = %w(bin/kbl)
+  spec.executables   = %w(kbl)
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
