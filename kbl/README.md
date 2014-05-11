@@ -42,19 +42,77 @@ end
 puts kbl.to_kbl #=> the KBL source code (in XML)
 ```
 
-### CLI Tool
+## CLI Tool
 
 This gem provides a CLI tool `kbl` that simplifies playlist importing / dumping via Song IDs (pathname).
 
-Usage:
+### Import
 
-```txt
-# Import KKBOX Songs from a list of IDs through [FILENAME] or STDIN.
-kbl import [INPUT_FILE or STDIN]
+Import KKBOX Songs from a list of IDs in a file or STDIN.
 
-# Dump meta data of KKBOX songs from your local KKBOX client database.
-kbl dump [INPUT_FILE or STDIN] [-o=OUTPUT_FILE or STDOUT] [-f=tsv]
+**Important**: this will add songs to your Temporary Playlist and after running, your Now Playing will become the last song in the list.
+
+```shell-session
+$ kbl import [INPUT_FILE or STDIN]
 ```
+
+Sample Input:
+
+    17645049
+    22021717
+    38369455
+    30772971
+    30772977
+
+Which maps to these songs:
+
+| Song ID | Artist | Song Name | Album |
+|---------|--------|-----------|-------|
+| 17645049 | 日笠陽子 | 美しき残酷な世界 | 美しき残酷な世界 |
+| 22021717 | 水樹奈々×T.M.Revolution | 革命デュアリズム | 革命デュアリズム |
+| 38369455 | 喜多村英梨 | Birth | 証×明 -SHOMEI- |
+| 30772971 | 藍井エイル | サンビカ | AUBE |
+| 30772977 | 藍井エイル | シリウス | AUBE |
+
+Result:
+
+* The above songs will be added to the bottom of Temporary Playlist.
+* Your Now Playing song will become シリウス by 藍井エイル from AUBE album.
+
+### Dump
+
+Dump meta data of KKBOX songs from your local KKBOX client database.
+
+```shell-session
+$ kbl dump [INPUT_FILE or STDIN] [-o=OUTPUT_FILE or STDOUT] [-f=tsv]
+```
+
+The default output format is TSV (Tab-Separated Values, the Tab version of CSV.)
+
+For tabular output like TSV and CSV, the order of columns will be:
+
+* Song ID (pathname)
+* Song Name
+* Artist ID
+* Artist Name
+* Album ID
+* Album Name
+
+Sample Input:
+
+    17645049
+    22021717
+    38369455
+    30772971
+    30772977
+
+Sample Output (TSV):
+
+    17645049	美麗殘酷的世界 (「進擊的巨人」片尾曲)	945776	日笠陽子(Hikasa Yoko)	1685970	美麗殘酷的世界
+    22021717	革命 Dualism	1176631	水樹奈奈 × T.M.Revolution	2084207	革命 Dualism (特別盤)
+    38369455	Birth	830288	喜多村英梨 (Eri Kitamura)	3847501	証×明-SHOMEI-
+    30772971	聖歌（動畫『雙斬少女KILL la KILL』插曲）	475589	藍井艾露 (Eir Aoi)	2828979	Aube初回限定盤
+    30772977	天狼星（動畫『雙斬少女KILL la KILL』片頭曲）	475589	藍井艾露 (Eir Aoi)	2828979	Aube初回限定盤
 
 ## Required Song Meta Data
 
