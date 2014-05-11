@@ -83,6 +83,8 @@ Result:
 
 Dump meta data of KKBOX songs from your local KKBOX client database.
 
+**Important:** You have to run `dump` immediately after `import` command. If you ran `import` and start playing another album or artist hot songs within KKBOX, your Temporary Playlist will be cleaned up and you'll lose the meta data, unless you have other playlists containing those songs.
+
 ```shell-session
 $ kbl dump [INPUT_FILE or STDIN] [-o=OUTPUT_FILE or STDOUT] [-f=tsv]
 ```
@@ -161,7 +163,8 @@ Can exist multiple times across multiple playlists.
 ## TODO
 
 * A workflow for how to build a KBL file from Song IDs.
-* More output formats for `kbl dump` command, e.g. CSV, JSON
+* More output formats for `kbl dump` command, e.g. CSV, JSON.
+* In Dump command, warn when there are some IDs returns 0, which means it is required to remove those songs from Library and import again.
 
 ## License
 
