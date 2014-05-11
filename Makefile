@@ -11,8 +11,7 @@ clean:
 download: $(TSV_FILES)
 
 %.kbl: %.tsv
-	ruby genkbl.rb < $*.tsv > $*.kbl
+	bundle exec ruby genkbl.rb < $*.tsv > $*.kbl
 
 %.tsv:
 	curl -o $@ $(URL_$*)
-
