@@ -16,6 +16,21 @@
 
 :warning: **警告:** 給一般用戶：使用本工具製作出來的 KBL 檔可能會對你的 KKBOX 曲庫有**負面影響**，如果你自認為電腦能力不夠強，請**不要**使用本程式產生出來的 KBL 檔，否則你最終可能要**清空所有歌單**才能繼續用 KKBOX。
 
+## 安裝方式
+
+需求：
+
+* OS X
+* Ruby 2.0+
+* SQLite 3
+* KKBOX for OS X
+
+如果你從來沒安裝過的話可以用 [RVM](https://rvm.io/)。OS X 10.9 有自帶 Ruby 2.0，不過下列指令可能會需要你加 `sudo` 才能成功。
+
+確定有 Ruby 之後，安裝 depdencies：
+
+    $ bundle
+
 ## 使用方法
 
 本程式僅實驗 KKBOX for Mac 。
