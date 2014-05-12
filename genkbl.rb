@@ -54,4 +54,4 @@ kbl = KBL::Package.new do |package|
   end
 end
 
-puts kbl.to_kbl
+puts kbl.to_xml
