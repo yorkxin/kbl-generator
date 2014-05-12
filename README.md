@@ -52,30 +52,6 @@
 
 會去下載上列網址的 TSV 檔回來，並且用產生器轉換成 KBL 檔。
 
-## 產生器
-
-genkbl.rb 。用法是丟進 STDIN 它會吐 KBL source 到 STDOUT，需使用 unix pipe 來方便作業。
-
-1. 準備一個檔案 `input.tsv` 格式如下（Tab 分隔檔）：
-
-       Song ID	Song Name	Artist ID	Artist Name	Album ID	Artist Name
-
-  每一欄以一個 Tab 字元 (`\t`) 分隔。
-
-  例：
-
-       17645049	美麗殘酷的世界 (「進擊的巨人」片尾曲)	945776	日笠陽子(Hikasa Yoko)	1685970	美麗殘酷的世界
-       22021717	革命 Dualism	1176631	水樹奈奈 × T.M.Revolution	2084207	革命 Dualism (特別盤)
-       38369455	Birth	830288	喜多村英梨 (Eri Kitamura)	3847501	証×明-SHOMEI-
-       30772971	聖歌（動畫『雙斬少女KILL la KILL』插曲）	475589	藍井艾露 (Eir Aoi)	2828979	Aube初回限定盤
-       30772977	天狼星（動畫『雙斬少女KILL la KILL』片頭曲）	475589	藍井艾露 (Eir Aoi)	2828979	Aube初回限定盤
-
-2. 執行：
-
-        ruby genkbl.rb < input.tsv > playlist.kbl
-
-3. 打開 `playlist.kbl`
-
 ## 歌單製作流程
 
 只適用於 KKBOX for Mac。
