@@ -1,6 +1,6 @@
 module KBL
   class Playlist
-    include KBL::Serializable::Playlist
+    include KBL::Serializable
 
     attr_reader :songs
     attr_accessor :name, :description, :id

@@ -1,6 +1,6 @@
 module KBL
   class Package
-    include KBL::Serializable::Package
+    include KBL::Serializable
 
     attr_reader :kkbox_version, :version, :description, :date, :playlists
 

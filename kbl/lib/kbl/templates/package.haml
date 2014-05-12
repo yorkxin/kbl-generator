@@ -1,0 +1,13 @@
+%utf-8_data
+  %kkbox_package
+  %kkbox_ver= self.kkbox_version
+
+  - @playlists.each do |playlist|
+    = playlist.to_xml
+
+  %package
+    %ver 1.0
+    %descr 包裝說明
+    %packdate= self.date.strftime("%Y%m%d%H%M%S") 
+    %playlistcnt= self.playlists.size 
+    %songcnt= self.total_songs 

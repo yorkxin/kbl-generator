@@ -1,0 +1,7 @@
+%playlist
+  %playlist_id= self.id
+  %playlist_name= self.name
+  %playlist_descr= self.description
+  %playlist_data
+    - @songs.each do |song|
+      = song.to_xml

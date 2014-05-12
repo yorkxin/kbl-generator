@@ -1,6 +1,6 @@
 module KBL
   class Song
-    include KBL::Serializable::Song
+    include KBL::Serializable
 
     attr_accessor :name, :artist, :album, :genre, :preference,
                 :play_count, :pathname, :type, :has_lyrics,
