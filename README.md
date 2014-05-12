@@ -50,13 +50,17 @@ genkbl.rb 。用法是丟進 STDIN 它會吐 KBL source 到 STDOUT，需使用 u
 
         Artist    Title    Album Name     Album ID    Song ID
 
-    每一欄以一個 Tab 字元 (\t) 分隔。
+    每一欄以一個 Tab 字元 (`\t`) 分隔。
 
     例：
 
-        angela\tKINGS\t465209\tZERO\t1962331\t20706554
-        angela\t境界線Set me free\t465209\tZERO\t1962331\t20706569
-        angela\tいつかのゼロから\t465209\tZERO\t1962331\t20706581
+```tsv
+17645049	美麗殘酷的世界 (「進擊的巨人」片尾曲)	945776	日笠陽子(Hikasa Yoko)	1685970	美麗殘酷的世界
+22021717	革命 Dualism	1176631	水樹奈奈 × T.M.Revolution	2084207	革命 Dualism (特別盤)
+38369455	Birth	830288	喜多村英梨 (Eri Kitamura)	3847501	証×明-SHOMEI-
+30772971	聖歌（動畫『雙斬少女KILL la KILL』插曲）	475589	藍井艾露 (Eir Aoi)	2828979	Aube初回限定盤
+30772977	天狼星（動畫『雙斬少女KILL la KILL』片頭曲）	475589	藍井艾露 (Eir Aoi)	2828979	Aube初回限定盤
+```
 
 2. 執行：
 
@@ -66,7 +70,52 @@ genkbl.rb 。用法是丟進 STDIN 它會吐 KBL source 到 STDOUT，需使用 u
 
 ## 關於檔案格式
 
-其實就是 XML。
+基本上是 XML。格式見後文。
+
+注意事項：
+
+* UTF-8
+* **不要 Escape HTML Entities** 如 `<` 、 `>` 、 `&` 等文字，KBL 檔是直接塞未 escape 的字串進去，如果 escape 的話，在該曲目不存在於本機 DB 的情況下，它會直接取用匯入歌單的 meta data，從而導致匯入之後的歌單出現 XML escaped entites。這個現象在該曲目第一次播放之後會解除（也就是 KKBOX client 去查詢了真正的 meta data）。
+
+格式如下：
+
+```xml
+<utf-8_data>
+  <kkbox_package>
+    <kkbox_ver>04000016</kkbox_ver><!-- 固定值，要從 KKBOX 匯出檔取得 -->
+    <playlist>
+      <playlist_id>1</playlist_id><!-- 歌單順序編號，從 1 開始 -->
+      <playlist_name>Playlist 1</playlist_name><!-- 歌單名稱，會變成匯入的歌單的名字 -->
+      <playlist_descr>A Sample Playlist</playlist_descr><!-- 歌單說明，在 KKBOX GUI 看不到 -->
+      <playlist_data>
+        <song_data><!-- 一首歌的 meta data，欄位說明見下文 -->
+          <song_name>Rising Hope</song_name>
+          <song_artist>Lisa</song_artist>
+          <song_album>Rising Hope</song_album>
+          <song_genre></song_genre>
+          <song_preference></song_preference>
+          <song_playcnt></song_playcnt>
+          <song_pathname>38437696</song_pathname>
+          <song_type></song_type>
+          <song_lyricsexist></song_lyricsexist>
+          <song_artist_id>5404</song_artist_id>
+          <song_album_id>3854689</song_album_id>
+          <song_song_idx></song_song_idx>
+        </song_data>
+        <!-- more <song_data> nodes -->
+      </playlist_data>
+    </playlist>
+    <!-- more <playlist> nodes, 其 playlist_id 要往上加 -->
+    <package>
+      <ver>1.0</ver>
+      <descr>包裝說明</descr><!-- 不明？ -->
+      <packdate>20140512232953</packdate><!-- timestamp 格式，strftime "%Y%m%d%H%M%S" -->
+      <playlistcnt>1</playlistcnt><!-- 有幾個 <playlist> nodes-->
+      <songcnt>177</songcnt><!-- 有幾首歌曲 -->
+    </package>
+  </kkbox_package>
+</utf-8_data>
+```
 
 ## 關於 KKBOX 的歌單輸出
 
@@ -79,8 +128,6 @@ genkbl.rb 。用法是丟進 STDIN 它會吐 KBL source 到 STDOUT，需使用 u
 這樣的話就可以用 Regexp 處理了。
 
 ## 關於歌單檔的最小需求
-
-見 sample.kbl 檔。
 
 意思是說，要用程式製作一份歌單，最少需要哪些資訊。
 
@@ -125,6 +172,11 @@ genkbl.rb 。用法是丟進 STDIN 它會吐 KBL source 到 STDOUT，需使用 u
 目前的 Workaround 是，在 `song_artist` 和 `song_album` 填入日文名稱，至少看得到文字，第一次播放就會取得正確資料了。但實際上這樣做仍然有 bug，就是某些情況下，後面播放的曲目會蓋掉前面曲目的歌手。你可以試著一直按下一首，就知道是什麼情況了。
 
 另外 KBL 檔歌單可以多載歌單，意思是說一個檔案裡存在多份歌單，匯入的時候，會一起匯入。但重要的是在 `<package>/<playlistcnt>` 裡面指定有幾份歌單，不指定的話，不管有多少 `<playlist>` 都不會匯入成功。
+
+## TODO
+
+* genkbl.rb 搬進 kbl gem 裡面
+* genkbl 要可以在 CLI 參數指定 Playlist Name
 
 ## LICENSE
 
