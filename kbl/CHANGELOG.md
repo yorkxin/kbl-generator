@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.1
+
+* Fix serious XML bug for Package. The KBL files are now generated properly.
+
 ## 0.2.0
 
 * Improved CLI tool usage documents and caveats.
