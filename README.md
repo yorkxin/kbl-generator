@@ -25,11 +25,6 @@
 * 一般用戶：尚有 bug ，不建議使用。
 * Hacker：請看下面的「產生器」一節。
 
-## 已知 Bug
-
-* 目前產生器沒有加入 Artist ID ，在不知道 Artist ID 的情況下，會導致 Playlist 裡面的歌手被後面播放的曲目給蓋掉。一直按「下一首」可以重現這個問題。
-  * 解法可能是必須填入 Artist ID ，但這項資訊在網頁版沒有，所以很難批次化。
-
 ## 本包裝內建的歌單
 
 * **ACG** - 日本動漫 ACG 歌單，原始檔在 [Google 試算表](https://docs.google.com/spreadsheets/d/1h_x3L9_LTKC2GCYo_nkjZvLlzpsWwMSzKjZqzCRsHWs)。
@@ -48,25 +43,59 @@ genkbl.rb 。用法是丟進 STDIN 它會吐 KBL source 到 STDOUT，需使用 u
 
 1. 準備一個檔案 `input.tsv` 格式如下（Tab 分隔檔）：
 
-        Artist    Title    Album Name     Album ID    Song ID
+       Song ID	Song Name	Artist ID	Artist Name	Album ID	Artist Name
 
-    每一欄以一個 Tab 字元 (`\t`) 分隔。
+  每一欄以一個 Tab 字元 (`\t`) 分隔。
 
-    例：
+  例：
 
-```tsv
-17645049	美麗殘酷的世界 (「進擊的巨人」片尾曲)	945776	日笠陽子(Hikasa Yoko)	1685970	美麗殘酷的世界
-22021717	革命 Dualism	1176631	水樹奈奈 × T.M.Revolution	2084207	革命 Dualism (特別盤)
-38369455	Birth	830288	喜多村英梨 (Eri Kitamura)	3847501	証×明-SHOMEI-
-30772971	聖歌（動畫『雙斬少女KILL la KILL』插曲）	475589	藍井艾露 (Eir Aoi)	2828979	Aube初回限定盤
-30772977	天狼星（動畫『雙斬少女KILL la KILL』片頭曲）	475589	藍井艾露 (Eir Aoi)	2828979	Aube初回限定盤
-```
+       17645049	美麗殘酷的世界 (「進擊的巨人」片尾曲)	945776	日笠陽子(Hikasa Yoko)	1685970	美麗殘酷的世界
+       22021717	革命 Dualism	1176631	水樹奈奈 × T.M.Revolution	2084207	革命 Dualism (特別盤)
+       38369455	Birth	830288	喜多村英梨 (Eri Kitamura)	3847501	証×明-SHOMEI-
+       30772971	聖歌（動畫『雙斬少女KILL la KILL』插曲）	475589	藍井艾露 (Eir Aoi)	2828979	Aube初回限定盤
+       30772977	天狼星（動畫『雙斬少女KILL la KILL』片頭曲）	475589	藍井艾露 (Eir Aoi)	2828979	Aube初回限定盤
 
 2. 執行：
 
         ruby genkbl.rb < input.tsv > playlist.kbl
 
 3. 打開 `playlist.kbl`
+
+## 歌單製作流程
+
+只適用於 KKBOX for Mac。
+
+首先，準備 ACG.txt 裡面一行一個 KKBOX Song ID。穿插空行無妨，會直接無視。
+
+然後匯入。:warning: **請注意**：這等同於在網頁上按一堆 Play 連結來把曲目灌進 KKBOX，副作用有：
+
+* 暫存歌單會出現一大堆曲目
+* 你正在播放的歌曲會變成曲目清單裡面的最後一首歌
+* :warning: **音量注意**
+
+執行方式：
+
+    $ kbl import ACG.txt
+
+懶得生檔案也可以直接用 `kbl import` 你就可以從 STDIN 灌進去。
+
+:warning: 這時候**不要改到暫存歌單**，否則查詢到的 meta data 會從本機 DB 裡面消失（除非它有出現在別的歌單裡）。
+
+會改到本機歌單的情況像是在專輯或歌手頁面對專輯或排行榜歌單按了「播放」連結，這時候暫存歌單就會被覆蓋。
+
+最後是把 meta data 從本機 DB 撈出來：
+
+    $ kbl dump ACG.txt -o ACG.tsv
+
+一樣，也可以不加 `ACG.txt` 把 query song ids 從 STDIN 灌進去。
+
+可以打開 `ACG.tsv` 看到裡面已經有 meta data 了。
+
+最後是轉換成 KBL 檔：
+
+    $ bundle exec genkbl.rb < ACG.tsv > ACG.kbl
+
+現在可以打開 `ACG.kbl` 來看成果了。
 
 ## 關於檔案格式
 
